@@ -15,20 +15,20 @@ def process_pdf_data(raw_json: dict) -> dict:
     content = clean_pdf_text(content)
     
     return {
-        "document_id": raw_json.get("docId"),
+        "document_id": str(raw_json.get("docId", "")),
         "source_type": "PDF",
-        "author": raw_json.get("authorName"),
-        "category": raw_json.get("docCategory"),
+        "author": str(raw_json.get("authorName", "Unknown")),
+        "category": str(raw_json.get("docCategory", "Uncategorized")),
         "content": content,
-        "timestamp": raw_json.get("createdAt")
+        "timestamp": str(raw_json.get("createdAt", ""))
     }
 
 def process_video_data(raw_json: dict) -> dict:
     return {
-        "document_id": raw_json.get("video_id"),
+        "document_id": str(raw_json.get("video_id", "")),
         "source_type": "Video",
-        "author": raw_json.get("creator_name"),
-        "category": raw_json.get("category"),
-        "content": raw_json.get("transcript"),
-        "timestamp": raw_json.get("published_timestamp")
+        "author": str(raw_json.get("creator_name", "Unknown")),
+        "category": str(raw_json.get("category", "Uncategorized")),
+        "content": str(raw_json.get("transcript", "")),
+        "timestamp": str(raw_json.get("published_timestamp", ""))
     }
